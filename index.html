@@ -2,8 +2,31 @@
 <html>
   <head>
     <link rel="stylesheet" href="./styles/main.css" />
+    <script src="./config/api_keys.js"></script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.1.1.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Sound</h1>
+    <script>
+    SC.initialize({
+      client_id: config.soundcloud_API_key
+    });
+
+    // stream track id 293
+    // SC.stream('/tracks/293').then(function(player){
+    //   player.play();
+    // });
+    var track_url = 'http://soundcloud.com/forss/flickermood';
+    $(document).ready(function() {
+      // SC.oEmbed(track_url, { auto_play: false }).then(function(oEmbed) {
+      //   console.log('oEmbed response: ', oEmbed.html);
+      //   $("#player").html(oEmbed.html);
+      // });
+    })
+    </script>
+    <div id="app">
+    </div>
+    <div id="player"></div>
+    <script src="./compiled/bundle.js"></script>
   </body>
 </html>

@@ -5,3 +5,12 @@
 .DS_Store
 .DS_Store?
 Thumbs.db
+
+# Config #
+/config
+
+# Libraries #
+/node_modules
+
+# Compiled #
+/compiled
