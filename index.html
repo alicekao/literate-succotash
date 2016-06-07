@@ -22,11 +22,16 @@
       //   console.log('oEmbed response: ', oEmbed.html);
       //   $("#player").html(oEmbed.html);
       // });
-    })
+    });
     </script>
     <div id="app">
     </div>
     <div id="player"></div>
     <script src="./compiled/bundle.js"></script>
+    <script type="text/babel">
+      ReactDOM.render(
+        <App />, document.getElementById('app')
+      );
+    </script>
   </body>
 </html>

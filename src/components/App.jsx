@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 
 import NavBar from './NavBar.jsx';
 import MusicTile from './MusicTile.jsx';
@@ -7,7 +6,7 @@ import MusicTile from './MusicTile.jsx';
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className="main">
         <NavBar />
         <h1>In app</h1>
         <MusicTile />
@@ -16,6 +15,4 @@ class App extends React.Component {
   }
 };
 
-ReactDOM.render(
-  <App />, document.getElementById('app')
-);
+export default App;

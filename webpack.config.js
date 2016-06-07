@@ -1,5 +1,5 @@
 module.exports={
-  entry: ['./src/components/App.jsx'],
+  entry: ['./src/index.jsx'],
   module: {
     loaders: [
       {
