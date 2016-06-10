@@ -1,9 +1,11 @@
 import React from 'react';
 import { mount, shallow, render } from 'enzyme';
 import { expect } from 'chai';
+import sinon from 'sinon'
 
 import App from '../src/components/App';
 import SearchBar from '../src/components/SearchBar';
+import NavBar from '../src/components/NavBar';
 
 describe('< App />', () => {
   it('Expects true to be true', () => expect(true).to.be.true);
@@ -27,9 +29,26 @@ describe('< App />', () => {
 
 });
 
-xdescribe('<SearchBar />', () => {
+describe('<SearchBar />', () => {
   it('Contains an input field', () => {
-    const SearchBar = shallow(<SearchBar />);
-    expect(SearchBar.find('input')).to.equal(true);
+    const searchbar = shallow(<SearchBar />);
+    expect(searchbar.find('input')).to.have.length(1);
   });
-})
+  it('Contains a button field', () => {
+    const searchbar = shallow(<SearchBar />);
+    expect(searchbar.find('button')).to.have.length(1);
+  });
+  it('Simulates click events', () => {
+    const onButtonClick = sinon.spy();
+    const searchbar = shallow(<SearchBar onClick={onButtonClick} />);
+    searchbar.find('button').simulate('click');
+    expect(onButtonClick.calledOnce).to.equal(true);
+  });
+});
+
+describe('<NavBar />', () => {
+  it('Contains the searchbar', () => {
+    const navbar = shallow(<NavBar />);
+    expect(navbar.find('SearchBar')).to.have.length(1);
+  })
+});
