@@ -6,7 +6,9 @@ export default class Player extends React.Component {
       <div className = "player">
         <div className="player_controls">
           <button>Previous</button>
-          <button onClick={() => console.log('clicked')}>Pause/Play</button>
+          <button onClick={() => {
+            console.log('props in player is', this.props);
+            this.props.togglePlay()}}>Pause/Play</button>
           <button>Next</button>
         </div>
       </div>

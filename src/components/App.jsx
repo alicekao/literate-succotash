@@ -16,7 +16,7 @@ class App extends React.Component {
     this.onSearch = this.onSearch.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
     this.pauseTrack = this.pauseTrack.bind(this);
-    this.playTrack = this.playTrack.bind(this);
+    // this.playTrack = this.playTrack.bind(this);
   }
 
   onSearch(searchTerm) {
@@ -37,34 +37,36 @@ class App extends React.Component {
     this.playTrack(id);
   }
 
-  pauseTrack() {
-    this.state.player.pause();
-    this.togglePlayPause;
-  }
-
   playTrack(trackID) {
     SC.stream(`/tracks/${trackID}`).then(player => {
       player.play();
-      this.setState({player: player, currentSong: trackID});
+      this.setState({player: player, currentSong: trackID, isPlaying: true});
     });
   }
 
   togglePlayPause() {
     this.state.isPlaying = !this.state.isPlaying;
+    if (this.state.isPlaying) {
+      this.state.player.play();
+    } else {
+      this.state.player.pause();
+    }
   }
 
   render() {
+    // if (!this.state.isPlaying && this.state.currentSong) {
+    //   this.state.player.pause();
+    // }
     return (
       <div className="main">
         <NavBar onSearch={this.onSearch}/>
-        <h1 onClick={this.pauseTrack}>pause</h1>
         {this.state.songs.map(song => {
           return <MusicTile
             handlePlay={(id) => this.handlePlay(id)}
             key={song.id}
             data={song}/>
         })}
-        <Player />
+        <Player togglePlay={this.togglePlayPause.bind(this)}/>
       </div>
     );
   }
