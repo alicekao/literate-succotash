@@ -4,7 +4,7 @@ import SearchBar from './SearchBar.jsx';
 const NavBar = (props) => {
   return (
     <div>
-      <p>This is a navbar</p>
+      <h1>Sound</h1>
       <SearchBar onSubmit={props.onSearch}/>
     </div>
   );

@@ -57,7 +57,7 @@ class App extends React.Component {
     return (
       <div className="main">
         <NavBar onSearch={this.onSearch}/>
-        <h1 onClick={this.pauseTrack}>In app</h1>
+        <h1 onClick={this.pauseTrack}>pause</h1>
         {this.state.songs.map(song => {
           return <MusicTile
             handlePlay={(id) => this.handlePlay(id)}

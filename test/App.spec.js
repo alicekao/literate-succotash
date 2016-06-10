@@ -38,11 +38,21 @@ describe('<SearchBar />', () => {
     const searchbar = shallow(<SearchBar />);
     expect(searchbar.find('button')).to.have.length(1);
   });
-  it('Simulates click events', () => {
+  describe('Click events', () => {
     const onButtonClick = sinon.spy();
-    const searchbar = shallow(<SearchBar onClick={onButtonClick} />);
-    searchbar.find('button').simulate('click');
-    expect(onButtonClick.calledOnce).to.equal(true);
+    const searchbar = shallow(<SearchBar onSubmit={onButtonClick} />);
+    searchbar.find('input').simulate('change', {target: {value: 'test message'}});
+    searchbar.find('button').simulate('click', { preventDefault(){} });
+
+    it('Should call the onClick function', () => {
+      expect(onButtonClick.calledOnce).to.equal(true);
+    });
+    xit('Should call the click handler fn with the input', () => {
+      expect(onButtonClick.calledWith).to.equal('test message');
+    });
+    it('Should clear the input after submit', () => {
+      expect(searchbar.find('input').prop('value')).to.equal('');
+    });
   });
 });
 

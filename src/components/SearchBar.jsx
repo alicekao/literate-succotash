@@ -1,15 +1,22 @@
 import React from 'react';
 
 export default class SearchBar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchTerm: ''
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(evt) {
     this.setState({searchTerm: evt.target.value});
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.state.searchTerm);
+    this.setState({searchTerm: ''});
   }
 
   render() {
@@ -25,11 +32,9 @@ export default class SearchBar extends React.Component {
         </div>
         <button
           type="submit"
-          className="btn btn-default"
-          onClick={(e) => {
-            e.preventDefault();
-            this.props.onSubmit(this.state.searchTerm);}}>
-            Go!
+          className="btn btn-default btn-lg"
+          onClick={(e) => {this.handleClick(e)}}>
+            <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
       </form>
     );
