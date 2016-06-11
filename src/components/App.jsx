@@ -65,9 +65,7 @@ class App extends React.Component {
   playNext() {
     let newIndex = this.state.currentSongIndex;
     if (++newIndex >= this.state.songs.length) {
-      console.log('stopped');
-      this.state.player.pause();
-      this.setState({currentSongIndex: null, player: null, isPlaying: false});
+      this.stopPlayer();
     } else {
       this.handlePlay(this.state.songs[newIndex]['id']);
     }
@@ -77,11 +75,21 @@ class App extends React.Component {
     let newIndex = this.state.currentSongIndex;
     if (--newIndex < 0) {
       console.log('stopped');
-      this.state.player.pause();
-      this.setState({currentSongIndex: null, player: null, isPlaying: false});
+      this.stopPlayer();
     } else {
       this.handlePlay(this.state.songs[newIndex]['id']);
     }
+  }
+
+  stopPlayer() {
+    if (this.state.player) {
+      this.state.player.pause();
+    }
+    this.setState({
+      currentSongIndex: null,
+      player: null,
+      isPlaying: false
+    });
   }
 
   togglePlayPause() {
@@ -95,7 +103,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container main">
         <NavBar onSearch={this.onSearch}/>
         <Player
           currentSong={this.state.songs[this.state.currentSongIndex]}

@@ -8,7 +8,7 @@ const SongDetails = (props) => {
    plays = props.currentSong.playback_count;
   }
   return (
-    <div className="jumbotron">
+    <div className="jumbotron text-left">
       <div className="container">
         <h3>{title}</h3>
         <h3>{plays}</h3>
