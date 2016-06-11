@@ -21,7 +21,7 @@ export default class SearchBar extends React.Component {
 
   render() {
     return (
-      <form className="col-md-4 col-md-offset-8 form-inline">
+      <form className="navbar-form navbar-right">
         <div className="form-group">
           <input
             placeholder="Search"
@@ -32,7 +32,7 @@ export default class SearchBar extends React.Component {
         </div>
         <button
           type="submit"
-          className="btn btn-default btn-lg"
+          className="btn btn-default"
           onClick={(e) => {this.handleClick(e)}}>
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>

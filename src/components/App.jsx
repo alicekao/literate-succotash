@@ -15,7 +15,8 @@ class App extends React.Component {
     };
     this.onSearch = this.onSearch.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
-    // this.playNext = this.playNext.bind(this);
+    this.playNext = this.playNext.bind(this);
+    this.playPrev = this.playPrev.bind(this);
     // this.findIndexById = this.findIndexById.bind(this);
   }
 
@@ -68,6 +69,17 @@ class App extends React.Component {
     }
   }
 
+  playPrev() {
+    let newIndex = this.state.currentSongIndex;
+    if (--newIndex < 0) {
+      console.log('stopped');
+      this.state.player.pause();
+      this.setState({currentSongIndex: null, player: null, isPlaying: false});
+    } else {
+      this.handlePlay(this.state.songs[newIndex]['id']);
+    }
+  }
+
   togglePlayPause() {
     this.state.isPlaying = !this.state.isPlaying;
     if (this.state.isPlaying && this.state.player) {
@@ -79,13 +91,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="main">
+      <div className="container">
         <NavBar onSearch={this.onSearch}/>
         <MusicTileContainer
           handlePlay={this.handlePlay}
           searchResultList={this.state.songs}/>
         <Player
-          songToPlayNext={this.playNext.bind(this)}
+          currentSong={this.state.songs[this.state.currentSongIndex]}
+          playNext={this.playNext}
+          playPrev={this.playPrev}
           togglePlay={this.togglePlayPause.bind(this)}/>
       </div>
     );
