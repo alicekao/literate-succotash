@@ -5,7 +5,7 @@ export default class Player extends React.Component {
     return (
       <div className = "player">
         <div className="player_controls">
-          <button>Previous</button>
+          <button >Previous</button>
           <button onClick={() => this.props.togglePlay()}>Pause/Play</button>
           <button onClick={() => this.props.songToPlayNext()}>Next</button>
         </div>

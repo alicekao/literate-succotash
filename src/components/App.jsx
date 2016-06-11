@@ -37,11 +37,14 @@ class App extends React.Component {
   }
 
   playTrack(trackID) {
-    SC.stream(`/tracks/${trackID}`).then(player => {
-      player.play();
+    return SC.stream(`/tracks/${trackID}`).then(player => {
+      if (this.state.player) {
+        this.state.player.pause();
+      }
       this.setState({player: player, currentSongIndex: this.findIndexById(trackID), isPlaying: true});
+      player.play();
       window.player = player;
-    });
+    }).catch(() => console.log(arguments))
   }
 
   findIndexById(id) {
@@ -67,9 +70,9 @@ class App extends React.Component {
 
   togglePlayPause() {
     this.state.isPlaying = !this.state.isPlaying;
-    if (this.state.isPlaying) {
+    if (this.state.isPlaying && this.state.player) {
       this.state.player.play();
-    } else {
+    } else if (this.state.player) {
       this.state.player.pause();
     }
   }
