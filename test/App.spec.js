@@ -50,6 +50,7 @@ describe('<SearchBar />', () => {
   it('Contains a button field', () => {
     const searchbar = shallow(<SearchBar />);
     expect(searchbar.find('button')).to.have.length(1);
+    expect(searchbar.find('.btn').type()).to.equal('button');
   });
 
   describe('Click events', () => {
@@ -80,10 +81,16 @@ describe('<NavBar />', () => {
 });
 
 describe('<MusicTileContainer />', () => {
-  it('Should contain music tiles', () => {
-    const container = shallow(<MusicTileContainer searchResultList={[{}, {}]}/>);
+  const container = shallow(<MusicTileContainer searchResultList={[{}, {}]}/>);
+  it('Should be a div', () => {
+    expect(container.type()).to.equal('div');
+  })
+
+  it('Should change the number of tiles based on props', () => {
     expect(container.find('MusicTile')).to.have.length(2);
-  });
+    container.setProps({searchResultList: [{}, {}, {}]});
+    expect(container.find('MusicTile')).to.have.length(3);
+  })
 });
 
 describe('<MusicTile />', () => {
@@ -93,8 +100,8 @@ describe('<MusicTile />', () => {
     title: 'title'
   }}/>);
 
-  it('Should produce a div', () => {
-    expect(musicTile.find('div')).to.have.length(1);
+  it('Should be a div', () => {
+    expect(musicTile.type()).to.equal('div');
   });
 
   it('Should produce a thumbnail', () => {
@@ -109,9 +116,23 @@ describe('<MusicTile />', () => {
 });
 
 describe('<SongDetails />', () => {
-  const songDetails = shallow(<SongDetails />);
 
-  it('Should produce 2 headers', () => {
+  it('Should produce headers displaying the song info', () => {
+
+    const songDetails = shallow(<SongDetails currentSong={{
+      title: 'title',
+      playback_count: 5
+    }}/>);
+
     expect(songDetails.find('h3')).to.have.length(2);
+    expect(songDetails.find('h3').first().text()).to.equal('title');
+    expect(songDetails.find('h3').at(1).text()).to.equal('5');
   });
+
+  it('Should not show a title if not playing', () => {
+    const songDetails = shallow(<SongDetails />);
+
+    expect(songDetails.find('h3').first().text()).to.equal(' ');
+    expect(songDetails.find('h3').nodes[1].props.children).to.equal(' ');
+  })
 });
