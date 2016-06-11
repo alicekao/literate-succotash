@@ -20,6 +20,10 @@ class App extends React.Component {
     // this.findIndexById = this.findIndexById.bind(this);
   }
 
+  componentDidMount() {
+    this.searchSoundcloud('louis the child');
+  }
+
   onSearch(searchTerm) {
     this.searchSoundcloud(searchTerm);
   }
@@ -93,14 +97,14 @@ class App extends React.Component {
     return (
       <div className="container">
         <NavBar onSearch={this.onSearch}/>
-        <MusicTileContainer
-          handlePlay={this.handlePlay}
-          searchResultList={this.state.songs}/>
         <Player
           currentSong={this.state.songs[this.state.currentSongIndex]}
           playNext={this.playNext}
           playPrev={this.playPrev}
           togglePlay={this.togglePlayPause.bind(this)}/>
+        <MusicTileContainer
+          handlePlay={this.handlePlay}
+          searchResultList={this.state.songs}/>
       </div>
     );
   }

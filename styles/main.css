@@ -1,3 +1,5 @@
-body {
-  font-family: Arial;
+.jumbotron {
+  background-image: url("../forestbckgd.jpg"); !important
+  background-size: cover; !important
+  color: white;
 }

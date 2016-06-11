@@ -9,12 +9,14 @@ export default class MusicTileContainer extends React.Component {
   render() {
     return (
       <div className=".container-fluid">
-       {this.props.searchResultList.map(song => {
-       return <MusicTile
-         handlePlay={(id) => this.props.handlePlay(id)}
-         key={song.id}
-         data={song}/>
-       })}
+        <div className="row">
+          {this.props.searchResultList.map(song => {
+            return <MusicTile
+             handlePlay={(id) => this.props.handlePlay(id)}
+             key={song.id}
+             data={song}/>
+           })}
+        </div>
      </div>
     );
   }
