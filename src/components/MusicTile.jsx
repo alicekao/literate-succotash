@@ -1,9 +1,7 @@
 import React from 'react';
 
 export default class MusicTile extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return (

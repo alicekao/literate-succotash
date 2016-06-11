@@ -1,7 +1,7 @@
 import React from 'react';
 
 import NavBar from './NavBar.jsx';
-import MusicTile from './MusicTile.jsx';
+import MusicTileContainer from './MusicTileContainer.jsx';
 import Player from './Player.jsx';
 
 class App extends React.Component {
@@ -9,14 +9,14 @@ class App extends React.Component {
     super();
     this.state = {
       songs: [],
-      currentSong:null,
+      currentSongIndex: null,
       player: null,
       isPlaying: false
     };
     this.onSearch = this.onSearch.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
-    this.pauseTrack = this.pauseTrack.bind(this);
-    // this.playTrack = this.playTrack.bind(this);
+    // this.playNext = this.playNext.bind(this);
+    // this.findIndexById = this.findIndexById.bind(this);
   }
 
   onSearch(searchTerm) {
@@ -33,15 +33,36 @@ class App extends React.Component {
   }
 
   handlePlay(id) {
-    console.log(this, this.playTrack);
     this.playTrack(id);
   }
 
   playTrack(trackID) {
     SC.stream(`/tracks/${trackID}`).then(player => {
       player.play();
-      this.setState({player: player, currentSong: trackID, isPlaying: true});
+      this.setState({player: player, currentSongIndex: this.findIndexById(trackID), isPlaying: true});
+      window.player = player;
     });
+  }
+
+  findIndexById(id) {
+    console.log('our state is', this.state.songs)
+    for (var j=0; j<this.state.songs.length; j++) {
+      if (this.state.songs[j].id === id) {
+        console.log('index in helperfn is ', j);
+        return j;
+      }
+    }
+  }
+
+  playNext() {
+    let newIndex = this.state.currentSongIndex;
+    if (++newIndex >= this.state.songs.length) {
+      console.log('stopped');
+      this.state.player.pause();
+      this.setState({currentSongIndex: null, player: null, isPlaying: false});
+    } else {
+      this.handlePlay(this.state.songs[newIndex]['id']);
+    }
   }
 
   togglePlayPause() {
@@ -54,19 +75,15 @@ class App extends React.Component {
   }
 
   render() {
-    // if (!this.state.isPlaying && this.state.currentSong) {
-    //   this.state.player.pause();
-    // }
     return (
       <div className="main">
         <NavBar onSearch={this.onSearch}/>
-        {this.state.songs.map(song => {
-          return <MusicTile
-            handlePlay={(id) => this.handlePlay(id)}
-            key={song.id}
-            data={song}/>
-        })}
-        <Player togglePlay={this.togglePlayPause.bind(this)}/>
+        <MusicTileContainer
+          handlePlay={this.handlePlay}
+          searchResultList={this.state.songs}/>
+        <Player
+          songToPlayNext={this.playNext.bind(this)}
+          togglePlay={this.togglePlayPause.bind(this)}/>
       </div>
     );
   }
