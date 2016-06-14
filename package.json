@@ -7,7 +7,9 @@
     "test": ""
   },
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "graphql": "^0.6.0",
     "jquery": "^2.2.4",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
