@@ -7,7 +7,7 @@ export default class MusicTile extends React.Component {
     return (
       <div
       className = "col-md-2 col-sm-3 col-xs-6"
-      onClick={() => {this.props.handlePlay(this.props.data.id)}}>
+      onClick={() => {this.props.enqueue(this.props.data)}}>
         <a href="#" className = "thumbnail">
           <img src={this.props.data.artwork_url}/>
         </a>

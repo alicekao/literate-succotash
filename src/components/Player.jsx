@@ -4,9 +4,9 @@ import SongDetails from './SongDetails.jsx';
 export default class Player extends React.Component {
   render() {
     return (
-      <div className = "container text-center">
+      <div id="player" className = "container text-center col-md-10 col-md-offset-2">
         <SongDetails currentSong={this.props.currentSong}/>
-        <div className="btn-group btn-group-lg">
+        <div className="btn-group btn-group-lg m-b-3">
           <button className="btn btn-default" onClick={() => this.props.playPrev()}>
             <span className="glyphicon glyphicon-backward"></span>
           </button>

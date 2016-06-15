@@ -1,6 +1,11 @@
-div.jumbotron {
-  background-image: url("../forestbckgd.jpg"); !important
+#player {
+  background-image: url("../forestbckgd.jpg");
+  background-size: cover;
 }
-div.jumbotron > h3 {
-  color: white; !important
+#player .jumbotron {
+  background: none;
+}
+
+#player h3 {
+  color: white;
 }

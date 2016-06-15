@@ -5,7 +5,7 @@ const SongDetails = (props) => {
   let plays = ' ';
   if (props.currentSong) {
    title = props.currentSong.title;
-   plays = props.currentSong.playback_count;
+   plays = `Plays ${props.currentSong.playback_count}`;
   }
   return (
     <div className="jumbotron text-left">
