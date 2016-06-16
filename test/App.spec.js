@@ -49,15 +49,14 @@ describe('<SearchBar />', () => {
   });
   it('Contains a button field', () => {
     const searchbar = shallow(<SearchBar />);
-    expect(searchbar.find('button')).to.have.length(1);
-    expect(searchbar.find('.btn').type()).to.equal('button');
+    expect(searchbar.find('Button')).to.have.length(1);
   });
 
   describe('Click events', () => {
     const onButtonClick = sinon.spy();
     const searchbar = shallow(<SearchBar onSubmit={onButtonClick} />);
     searchbar.find('input').simulate('change', {target: {value: 'test message'}});
-    searchbar.find('button').simulate('click', { preventDefault(){} });
+    searchbar.find('Button').simulate('click', { preventDefault(){} });
 
     it('Should call the onClick function', () => {
       expect(onButtonClick.calledOnce).to.equal(true);
@@ -126,7 +125,7 @@ describe('<SongDetails />', () => {
 
     expect(songDetails.find('h3')).to.have.length(2);
     expect(songDetails.find('h3').first().text()).to.equal('title');
-    expect(songDetails.find('h3').at(1).text()).to.equal('5');
+    expect(songDetails.find('h3').at(1).text()).to.equal('Plays 5');
   });
 
   it('Should not show a title if not playing', () => {
