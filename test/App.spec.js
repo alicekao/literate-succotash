@@ -47,6 +47,7 @@ describe('<SearchBar />', () => {
     const searchbar = shallow(<SearchBar />);
     expect(searchbar.find('input')).to.have.length(1);
   });
+
   it('Contains a button field', () => {
     const searchbar = shallow(<SearchBar />);
     expect(searchbar.find('Button')).to.have.length(1);
@@ -55,6 +56,7 @@ describe('<SearchBar />', () => {
   describe('Click events', () => {
     const onButtonClick = sinon.spy();
     const searchbar = shallow(<SearchBar onSubmit={onButtonClick} />);
+
     searchbar.find('input').simulate('change', {target: {value: 'test message'}});
     searchbar.find('Button').simulate('click', { preventDefault(){} });
 
@@ -79,6 +81,47 @@ describe('<NavBar />', () => {
   });
 });
 
+describe('<Player />', () => {
+  const onPauseClick = sinon.spy();
+  const onPrevClick = sinon.spy();
+  const onNextClick = sinon.spy();
+  const player = shallow(<Player
+    togglePlay={onPauseClick}
+    playPrev={onPrevClick}
+    playNext={onNextClick}
+    />);
+  const buttongroup = player.find('ButtonGroup');
+
+  it('Should contains a Jumbotron', () => {
+    expect(player.find('Jumbotron')).to.have.length(1);
+  });
+  it('Should contain SongDetails', () => {
+    expect(player.find('SongDetails')).to.have.length(1);
+  });
+
+  describe('Player buttons', () => {
+    it('Should contain a button group with 3 buttons', () => {
+      expect(buttongroup).to.have.length(1);
+      expect(buttongroup.find('Button')).to.have.length(3);
+    })
+    it('Should togglePlay when clicking pause', () => {
+      const pauseBtn = buttongroup.childAt(1);
+      pauseBtn.simulate('click');
+      expect(onPauseClick.calledOnce).to.be.true;
+    });
+    it('Should call previous fn when clicking prev', () => {
+      const prevBtn = buttongroup.childAt(0);
+      prevBtn.simulate('click');
+      expect(onPrevClick.calledOnce).to.be.true;
+    });
+    it('Should call next fn when clicking next', () => {
+      const nextBtn = buttongroup.childAt(2);
+      nextBtn.simulate('click');
+      expect(onNextClick.calledOnce).to.be.true;
+    });
+  })
+});
+
 describe('<MusicTileContainer />', () => {
   const container = shallow(<MusicTileContainer searchResultList={[{}, {}]}/>);
   it('Should be a div', () => {
@@ -93,11 +136,13 @@ describe('<MusicTileContainer />', () => {
 });
 
 describe('<MusicTile />', () => {
-  const musicTile = shallow(<MusicTile data={{
-    artwork_url: 'x',
-    id: 1,
-    title: 'title'
-  }}/>);
+  const musicTile = shallow(<MusicTile data={
+    {
+      artwork_url: 'x',
+      id: 1,
+      title: 'title'
+    }
+  }/>);
 
   it('Should be a div', () => {
     expect(musicTile.type()).to.equal('div');
@@ -118,10 +163,12 @@ describe('<SongDetails />', () => {
 
   it('Should produce headers displaying the song info', () => {
 
-    const songDetails = shallow(<SongDetails currentSong={{
-      title: 'title',
-      playback_count: 5
-    }}/>);
+    const songDetails = shallow(<SongDetails currentSong={
+      {
+        title: 'title',
+        playback_count: 5
+      }
+    }/>);
 
     expect(songDetails.find('h3')).to.have.length(2);
     expect(songDetails.find('h3').first().text()).to.equal('title');
