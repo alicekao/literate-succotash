@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -30,12 +31,12 @@ export default class SearchBar extends React.Component {
             value={this.state.searchTerm}
           />
         </div>
-        <button
+        <Button
           type="submit"
-          className="btn btn-default"
+          bsStyle="success"
           onClick={(e) => {this.handleClick(e)}}>
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
+        </Button>
       </form>
     );
   }

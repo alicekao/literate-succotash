@@ -1,16 +1,19 @@
 import React from 'react';
 import SearchBar from './SearchBar.jsx';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 const NavBar = (props) => {
   return (
-    <nav className="navbar navbar-default navbar-static-top">
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <a className="navbar-brand">Sound</a>
-        </div>
-        <SearchBar onSubmit={props.onSearch}/>
-      </div>
-    </nav>
+    <Navbar className="navbar navbar-default navbar-static-top">
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="#">Sound</a>
+        </Navbar.Brand>
+      </Navbar.Header>
+      <Navbar.Form pullRight>
+          <SearchBar onSubmit={props.onSearch}/>
+      </Navbar.Form>
+    </Navbar>
   );
 };
 
