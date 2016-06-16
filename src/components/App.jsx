@@ -20,21 +20,11 @@ class App extends React.Component {
     this.enqueue = this.enqueue.bind(this);
     this.playNext = this.playNext.bind(this);
     this.playPrev = this.playPrev.bind(this);
-    // this.findIndexById = this.findIndexById.bind(this);
+    this.selectGenre = this.selectGenre.bind(this);
   }
 
   componentDidMount() {
-    this.searchSoundcloud('louis the child');
-  }
-
-
-  searchSoundcloud(query) {
-    return SC.get('/tracks', {
-      q: query
-    }).then(tracks => {
-      this.setState({songs: tracks});
-      console.log('response from search is: ', this.state.songs)
-    });
+    this.searchSCByQuery('louis the child');
   }
 
   enqueue(song) {
@@ -42,23 +32,6 @@ class App extends React.Component {
     this.setState({queue: newQueue}, () => {
     this.playQueue();
     });
-  }
-
-  playQueue() {
-    if (this.state.queue.length > 0) {
-      this.playTrack(this.state.queue[this.state.currentQueueI]);
-    }
-  }
-
-  playTrack(song) {
-    return SC.stream(`/tracks/${song.id}`).then(player => {
-      if (this.state.player) {
-        this.state.player.pause();
-      }
-      this.setState({player: player, currentSongId: song.id, isPlaying: true});
-      player.play();
-      window.player = player;
-    }).catch(() => console.log(arguments))
   }
 
   findSongById(id) {
@@ -70,7 +43,7 @@ class App extends React.Component {
   }
 
   onSearch(searchTerm) {
-    this.searchSoundcloud(searchTerm);
+    this.searchSCByQuery(searchTerm);
   }
 
   playNext() {
@@ -90,6 +63,50 @@ class App extends React.Component {
       this.state.currentQueueI--;
       playQueue();
     }
+  }
+
+  playQueue() {
+    if (this.state.queue.length > 0) {
+      this.playTrack(this.state.queue[this.state.currentQueueI]);
+    }
+  }
+
+  playTrack(song) {
+    return SC.stream(`/tracks/${song.id}`).then(player => {
+      if (this.state.player) {
+        this.state.player.pause();
+      }
+      this.setState({player: player, currentSongId: song.id, isPlaying: true});
+      player.play();
+      window.player = player;
+    }).catch(() => console.log(arguments))
+  }
+
+  searchSCByGenre(genre) {
+    return SC.get('/tracks', {
+      genres: genre
+    }).then(tracks => {
+      this.setState({songs: this.sortByPopularity(tracks)});
+    });
+  }
+
+  searchSCByQuery(query) {
+    return SC.get('/tracks', {
+      q: query
+    }).then(tracks => {
+      this.setState({songs: this.sortByPopularity(tracks)});
+      console.log('response from search is: ', this.state.songs)
+    });
+  }
+
+  sortByPopularity(songArr) {
+    return songArr.sort((a,b) => {
+      return b.playback_count - a.playback_count;
+    });
+  }
+
+  selectGenre(selectedTab) {
+    this.searchSCByGenre(selectedTab);
   }
 
   stopPlayer() {
@@ -115,16 +132,21 @@ class App extends React.Component {
   render() {
     return (
       <div className="container main">
-        <NavBar onSearch={this.onSearch}/>
+        <NavBar
+          selectGenre={this.selectGenre}
+          onSearch={this.onSearch}
+        />
         <Playlist queue={this.state.queue}/>
         <Player
           currentSong={this.state.queue[this.state.currentQueueI]}
           playNext={this.playNext}
           playPrev={this.playPrev}
-          togglePlay={this.togglePlayPause.bind(this)}/>
+          togglePlay={this.togglePlayPause.bind(this)}/
+        >
         <MusicTileContainer
           enqueue={this.enqueue}
-          searchResultList={this.state.songs}/>
+          searchResultList={this.state.songs}
+        />
       </div>
     );
   }
