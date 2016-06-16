@@ -27,9 +27,6 @@ class App extends React.Component {
     this.searchSoundcloud('louis the child');
   }
 
-  onSearch(searchTerm) {
-    this.searchSoundcloud(searchTerm);
-  }
 
   searchSoundcloud(query) {
     return SC.get('/tracks', {
@@ -70,6 +67,10 @@ class App extends React.Component {
         return j;
       }
     }
+  }
+
+  onSearch(searchTerm) {
+    this.searchSoundcloud(searchTerm);
   }
 
   playNext() {

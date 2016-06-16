@@ -14,8 +14,9 @@ export default class MusicTileContainer extends React.Component {
             return <MusicTile
              enqueue={(song) => this.props.enqueue(song)}
              key={song.id}
-             data={song}/>
-           })}
+             data={song}
+            />
+          })}
         </div>
      </div>
     );
