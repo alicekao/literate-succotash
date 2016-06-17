@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.searchSCByQuery('louis the child');
+    this.searchSCByGenre('jazz');
   }
 
   enqueue(song) {
@@ -132,7 +132,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid className="container main">
+      <Grid className="main">
         <NavBar
           selectGenre={this.selectGenre}
           onSearch={this.onSearch}
@@ -142,16 +142,20 @@ class App extends React.Component {
             <Playlist queue={this.state.queue}/>
           </Col>
           <Col md={10}>
-            <Player
-              currentSong={this.state.queue[this.state.currentQueueI]}
-              playNext={this.playNext}
-              playPrev={this.playPrev}
-              togglePlay={this.togglePlayPause.bind(this)}/
-            >
-            <MusicTileContainer
-              enqueue={this.enqueue}
-              searchResultList={this.state.songs}
-            />
+            <Row>
+              <Player
+                currentSong={this.state.queue[this.state.currentQueueI]}
+                playNext={this.playNext}
+                playPrev={this.playPrev}
+                togglePlay={this.togglePlayPause.bind(this)}/
+              >
+            </Row>
+            <Row>
+              <MusicTileContainer
+                enqueue={this.enqueue}
+                searchResultList={this.state.songs}
+              />
+            </Row>
           </Col>
         </Row>
       </Grid>

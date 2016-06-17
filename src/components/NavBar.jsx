@@ -16,7 +16,7 @@ export default class NavBar extends React.Component {
 
   render() {
     return (
-      <Navbar className="navbar navbar-default navbar-static-top">
+      <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
             <a href="#">Sound</a>
@@ -26,9 +26,13 @@ export default class NavBar extends React.Component {
           bsStyle="pills"
           activeKey={this.state.currentGenre}onSelect={this.selectGenre}
         >
-          <NavItem eventKey={'jazz'}>Jazzcat</NavItem>
-          <NavItem eventKey={'electronic'}>Light Yellow</NavItem>
-          <NavItem eventKey={'hip hop'}>Poop</NavItem>
+          <NavItem eventKey={'jazz'}>Jazz</NavItem>
+          <NavItem eventKey={'hip hop'}>Hip Hop</NavItem>
+          <NavItem eventKey={'rap'}>Rap</NavItem>
+          <NavItem eventKey={'pop'}>Pop</NavItem>
+          <NavItem eventKey={'electronic'}>Electronic</NavItem>
+          <NavItem eventKey={'house'}>House</NavItem>
+          <NavItem eventKey={'classical'}>Classical</NavItem>
         </Nav>
         <Navbar.Form pullRight>
             <SearchBar onSubmit={this.props.onSearch}/>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col, Thumbnail } from 'react-bootstrap';
 
 export default class MusicTile extends React.Component {
   enqueue(e) {
@@ -8,14 +9,12 @@ export default class MusicTile extends React.Component {
 
   render() {
     return (
-      <div
-      className = "col-md-2 col-sm-3 col-xs-6"
-      onClick={(e) => {this.enqueue(e)}}>
-        <a href="#" className = "thumbnail">
-          <img src={this.props.data.artwork_url}/>
-        </a>
-        {this.props.data.title }
-      </div>
+      <Col md={2} sm={3} xs={6}
+      onClick={(e) => {this.enqueue(e)}}
+      >
+        <Thumbnail href="#" src={this.props.data.artwork_url} />
+        <p>Title{this.props.data.title}</p>
+      </Col>
     );
   }
 };

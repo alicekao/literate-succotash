@@ -1,9 +1,10 @@
 import React from 'react';
+import { ListGroupItem } from 'react-bootstrap';
 
 export default class PlaylistEntry extends React.Component {
   render() {
     return (
-      <li>{this.props.songData.title}</li>
+      <ListGroupItem>{this.props.songData.title}</ListGroupItem>
     );
   }
 }

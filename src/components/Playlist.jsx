@@ -1,5 +1,6 @@
 import React from 'react';
 import PlaylistEntry from './PlaylistEntry.jsx';
+import { ListGroup } from 'react-bootstrap';
 
 export default class Playlist extends React.Component{
   render() {
@@ -11,9 +12,10 @@ export default class Playlist extends React.Component{
     }
     return (
       <div>
-        <ol>
+        <h2>Up Next</h2>
+        <ListGroup>
           {queueList}
-        </ol>
+        </ListGroup>
       </div>
     );
   }

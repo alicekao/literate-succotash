@@ -1,7 +1,9 @@
 #player {
   background-image: url("../forestbckgd.jpg");
   background-size: cover;
+  text-align: center;
 }
+
 #player .jumbotron {
   background: none;
 }
