@@ -10,7 +10,7 @@ export default class Playlist extends React.Component{
       });
     }
     return (
-      <div className="col-md-2">
+      <div>
         <ol>
           {queueList}
         </ol>

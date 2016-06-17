@@ -5,7 +5,7 @@ import { Jumbotron, Button, ButtonGroup } from 'react-bootstrap';
 export default class Player extends React.Component {
   render() {
     return (
-      <Jumbotron id="player" className = "container text-center col-md-10 col-md-offset-2">
+      <Jumbotron id="player" className = "container text-center">
         <SongDetails currentSong={this.props.currentSong}/>
         <ButtonGroup>
           <Button onClick={() => this.props.playPrev()}>

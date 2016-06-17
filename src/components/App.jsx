@@ -4,6 +4,7 @@ import NavBar from './NavBar.jsx';
 import MusicTileContainer from './MusicTileContainer.jsx';
 import Player from './Player.jsx';
 import Playlist from './Playlist.jsx';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor() {
@@ -131,23 +132,29 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container main">
+      <Grid className="container main">
         <NavBar
           selectGenre={this.selectGenre}
           onSearch={this.onSearch}
         />
-        <Playlist queue={this.state.queue}/>
-        <Player
-          currentSong={this.state.queue[this.state.currentQueueI]}
-          playNext={this.playNext}
-          playPrev={this.playPrev}
-          togglePlay={this.togglePlayPause.bind(this)}/
-        >
-        <MusicTileContainer
-          enqueue={this.enqueue}
-          searchResultList={this.state.songs}
-        />
-      </div>
+        <Row>
+          <Col md={2}>
+            <Playlist queue={this.state.queue}/>
+          </Col>
+          <Col md={10}>
+            <Player
+              currentSong={this.state.queue[this.state.currentQueueI]}
+              playNext={this.playNext}
+              playPrev={this.playPrev}
+              togglePlay={this.togglePlayPause.bind(this)}/
+            >
+            <MusicTileContainer
+              enqueue={this.enqueue}
+              searchResultList={this.state.songs}
+            />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 };
