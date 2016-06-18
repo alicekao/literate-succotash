@@ -11,6 +11,8 @@ import Player from '../src/components/Player';
 import SearchBar from '../src/components/SearchBar';
 import SongDetails from '../src/components/SongDetails';
 
+import { Col } from 'react-bootstrap';
+
 describe('< App />', () => {
   it('Expects true to be true', () => expect(true).to.be.true);
 
@@ -124,9 +126,13 @@ describe('<Player />', () => {
 
 describe('<MusicTileContainer />', () => {
   const container = shallow(<MusicTileContainer searchResultList={[{}, {}]}/>);
-  it('Should be a div', () => {
-    expect(container.type()).to.equal('div');
-  })
+  it('Should be a Grid', () => {
+    expect(container.find('Grid').length).to.equal(1);
+    expect(container.type().displayName).to.equal('Grid');
+  });
+  it('Should contain a single row', () => {
+    expect(container.find('Grid').find('Row').length).to.equal(1);
+  });
 
   it('Should change the number of tiles based on props', () => {
     expect(container.find('MusicTile')).to.have.length(2);
@@ -144,18 +150,18 @@ describe('<MusicTile />', () => {
     }
   }/>);
 
-  it('Should be a div', () => {
-    expect(musicTile.type()).to.equal('div');
+  it('Should have a Col', () => {
+    console.log(musicTile.type().displayName)
+    expect(musicTile.type().displayName).to.equal('Col');
   });
 
   it('Should produce a thumbnail', () => {
-    expect(musicTile.find('a')).to.have.length(1);
-    expect(musicTile.find('img')).to.have.length(1);
-    expect(musicTile.find('a').hasClass('thumbnail')).to.equal(true);
+    expect(musicTile.find('Thumbnail')).to.have.length(1);
   });
 
   it('Should show the song title', () => {
-    expect(musicTile.text()).to.contain('title');
+    expect(musicTile.find('p').length).to.equal(1);
+    expect(musicTile.find('p').text()).to.contain('Title');
   });
 });
 

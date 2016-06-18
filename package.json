@@ -30,7 +30,7 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "test": "mocha test/setup.js test/App.spec.js",
+    "test": "mocha --compilers js:babel-core/register test/App.spec.js",
     "start": "webpack -w"
   },
   "repository": {
