@@ -132,7 +132,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Grid className="main">
+      <Grid fluid={true} className="main">
         <NavBar
           selectGenre={this.selectGenre}
           onSearch={this.onSearch}
@@ -141,7 +141,7 @@ class App extends React.Component {
           <Col md={2}>
             <Playlist queue={this.state.queue}/>
           </Col>
-          <Col md={10}>
+          <Col md={8}>
             <Row>
               <Player
                 currentSong={this.state.queue[this.state.currentQueueI]}

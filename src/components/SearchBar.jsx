@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon, Form, FormGroup, FormControl, Navbar } from 'react-bootstrap';
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -11,33 +11,33 @@ export default class SearchBar extends React.Component {
   }
 
   handleChange(evt) {
-    this.setState({searchTerm: evt.target.value});
+    this.setState({ searchTerm: evt.target.value });
   }
 
   handleClick(e) {
     e.preventDefault();
     this.props.onSubmit(this.state.searchTerm);
-    this.setState({searchTerm: ''});
+    this.setState({ searchTerm: '' });
   }
 
   render() {
     return (
-      <form className="navbar-form navbar-right">
-        <div className="form-group">
-          <input
+      <Navbar.Form pullRight>
+        <FormGroup>
+          <FormControl
+            type = "text"
             placeholder="Search"
-            className="form-control"
-            onChange={this.handleChange.bind(this)}
+            onChange={this.handleChange.bind(this) }
             value={this.state.searchTerm}
-          />
-        </div>
+            />
+        </FormGroup>
         <Button
           type="submit"
           bsStyle="success"
-          onClick={(e) => {this.handleClick(e)}}>
-            <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
+          onClick={(e) => { this.handleClick(e) } }>
+          <Glyphicon glyph="search"></Glyphicon>
         </Button>
-      </form>
+      </Navbar.Form>
     );
   }
 }

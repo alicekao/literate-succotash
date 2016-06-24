@@ -1,17 +1,33 @@
-module.exports={
-  entry: ['./src/index.jsx'],
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  entry: [
+    'webpack-hot-middleware/client',
+    './src/index'
+  ],
+  output: {
+    path: path.join(__dirname, 'compiled'),
+    publicPath: '/static/',
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     loaders: [
       {
-        loader: "babel-loader",
-        query: {
-          presets: ['es2015', 'react']
-        }
+        test: /\.js$/,
+        loaders: ["babel"],
+        exclude: '/node_modules/',
+        include: __dirname
+      },
+      {
+        test: /\.css?$/,
+        loaders: ['style', 'raw'],
+        include: __dirname
       }
     ]
-  },
-  output: {
-    path: './compiled',
-    filename: 'bundle.js'
   }
 }

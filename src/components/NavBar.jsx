@@ -5,13 +5,13 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentGenre: 'jazz'};
+    this.state = { currentGenre: 'jazz' };
     this.selectGenre = this.selectGenre.bind(this);
   }
 
   selectGenre(newGenre) {
     this.props.selectGenre(newGenre);
-    this.setState({ currentGenre: newGenre});
+    this.setState({ currentGenre: newGenre });
   }
 
   render() {
@@ -19,13 +19,13 @@ export default class NavBar extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Sound</a>
+            <a href="#">Soundd</a>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav
           bsStyle="pills"
           activeKey={this.state.currentGenre}onSelect={this.selectGenre}
-        >
+          >
           <NavItem eventKey={'jazz'}>Jazz</NavItem>
           <NavItem eventKey={'hip hop'}>Hip Hop</NavItem>
           <NavItem eventKey={'rap'}>Rap</NavItem>
@@ -34,9 +34,7 @@ export default class NavBar extends React.Component {
           <NavItem eventKey={'house'}>House</NavItem>
           <NavItem eventKey={'classical'}>Classical</NavItem>
         </Nav>
-        <Navbar.Form pullRight>
-            <SearchBar onSubmit={this.props.onSearch}/>
-        </Navbar.Form>
+        <SearchBar onSubmit={this.props.onSearch}/>
       </Navbar>
     );
   }
