@@ -6,7 +6,7 @@ var config = require('./webpack.config');
 var express = require('express');
 
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {
@@ -14,9 +14,8 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html')
-});
+console.log('request for /, dirname is: ', __dirname);
+app.use(express.static(__dirname + '/')),
 
 app.listen(port, function (err) {
   if (err) {
