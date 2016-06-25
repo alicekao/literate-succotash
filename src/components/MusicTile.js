@@ -1,19 +1,18 @@
-import React from 'react';
 import { Col, Thumbnail } from 'react-bootstrap';
-
 import React, {PropTypes} from 'react';
 
-const MusicTile = props => {
+const MusicTile = ({song}) => {
   return (
-    <div>
-      
-    </div>
+    <Col md={2} sm={3} xs={6}>
+      <Thumbnail href="#" />
+      <p>song.title</p>
+    </Col>
   );
 };
 
-MusicTile.propTypes = {
+// MusicTile.propTypes = {
   
-};
+// };
 
 export default MusicTile;
 // export default class MusicTile extends React.Component {
