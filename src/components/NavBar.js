@@ -2,7 +2,17 @@ import React from 'react';
 // import SearchBar from './SearchBar.jsx';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
-const NavBar = () => {
+const generateNavTab = (name) => {
+  return (
+    <NavItem key={name} eventKey={name.toLowerCase()}>
+    {name}
+    </NavItem>
+  )
+};
+
+
+const NavBar = ({ changeGenre, currGenre }) => {
+  console.log('curr genre is: ', currGenre);
   return (
     <Navbar>
       <Navbar.Header>
@@ -10,13 +20,12 @@ const NavBar = () => {
           <a href="#">Sound</a>
         </Navbar.Brand>
       </Navbar.Header>
-      <Nav>
-        <NavItem>Jazz</NavItem>
-        <NavItem>Hip Hop</NavItem>
-        <NavItem>Electronic</NavItem>
-        <NavItem>Classical</NavItem>
-        <NavItem>Pop</NavItem>
-        <NavItem>Country</NavItem>
+      <Nav activeKey={currGenre} onSelect={changeGenre}>
+        {
+          ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'].map((genre) => {
+            return generateNavTab(genre);
+          })
+        }
       </Nav>
     </Navbar>
   );

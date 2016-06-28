@@ -7,9 +7,10 @@ import reducers from './reducers';
 
 const store = configureStore();
 
+// Provider makes the store available to all containers so they can subscribe to it
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('root')
 );

@@ -10,12 +10,16 @@ import Main from '../components/Main';
 
 class App extends React.Component {
   render() {
+    const { changeGenre } = this.props.actions;
+    const { songs, genre } = this.props;
     return (
       <div>
-        <NavBar />
+        <NavBar
+        currGenre={ genre }
+        changeGenre = {changeGenre} />
         <Sidebar />
         <Main />
-        <Songs songs={this.props.songs} />
+        <Songs songs={songs} />
       </div>
     );
   }
@@ -25,12 +29,15 @@ App.propTypes = {
   songs: PropTypes.array.isRequired
 }
 
+// How to transform current redux store state into props
 function mapStateToProps(state) {
   return {
-    songs: state.songs
+    songs: state.songs,
+    genre: state.genre
   };
 }
 
+// Receives dispatch method and returns cb props that you want to inject into this component
 function mapDispatchToProps(dispatch) {
   return {
     //bindactioncreators automatically binds many action creators to a dispatch fn

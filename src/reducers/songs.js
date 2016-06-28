@@ -15,6 +15,7 @@ const initialState = [
 
 // A reducer is a pure fn that takes the previous state and an action and computes the next state
 export default function songs(state = initialState, action) {
+  console.log(action.type, action.payload);
   switch (action.type) {
     case ADD_SONG:
       return [
