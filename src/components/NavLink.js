@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import store from '../index';
 import { NavItem } from 'react-bootstrap';
 
 const Link = ({active, onClick, children}) => {
@@ -16,7 +15,10 @@ const Link = ({active, onClick, children}) => {
 };
 
 class NavLink extends Component {
+  
   componentDidMount() {
+    console.log('context is', this.context);
+    const store = this.context.store;
     this.unsubscribe = store.subscribe(() => {
       this.forceUpdate();
     });
@@ -28,6 +30,7 @@ class NavLink extends Component {
 
   render() {
     const props = this.props;
+    const store = this.context.store;
     const state = store.getState();
     return (
       <Link
@@ -43,7 +46,8 @@ class NavLink extends Component {
   }
 }
 
-NavLink.propTypes = {
+NavLink.contextTypes = {
+  store: PropTypes.object
 };
 
 export default NavLink;

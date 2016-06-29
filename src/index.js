@@ -8,6 +8,7 @@ import reducers from './reducers';
 const store = configureStore();
 
 // Provider makes the store available to all containers so they can subscribe to it
+
 export default store;
 
 ReactDOM.render(

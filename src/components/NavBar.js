@@ -3,14 +3,6 @@ import SearchBar from './SearchBar';
 import NavLink from './NavLink';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
-const generateNavTab = (name) => {
-  return (
-    <NavItem key={name} eventKey={name.toLowerCase()}>
-    {name}
-    </NavItem>
-  )
-};
-
 const genreArr = ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'];
 
 const NavBar = () => {
@@ -22,12 +14,10 @@ const NavBar = () => {
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
-        <NavLink genre='Jazz'/>
-        <NavLink genre='Hip hop'/>
-        <NavLink genre='Pop'/>
-        <NavLink genre='Electronic'/>
-        <NavLink genre='Rap'/>
-        <NavLink genre='Country'/>
+        {genreArr.map(genre => {
+          return <NavLink key={genre} genre={genre} />
+        })
+        }
       </Nav>
       <SearchBar />
     </Navbar>
