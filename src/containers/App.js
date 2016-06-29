@@ -10,7 +10,7 @@ import Main from '../components/Main';
 
 class App extends React.Component {
   render() {
-    const { changeGenre } = this.props.actions;
+    
     const { songs, genre } = this.props;
     return (
       <div>
@@ -36,6 +36,7 @@ function mapStateToProps(state) {
 }
 
 // Receives dispatch method and returns cb props that you want to inject into this component
+// Takes sotre dispatch as first param
 function mapDispatchToProps(dispatch) {
   return {
     //bindactioncreators automatically binds many action creators to a dispatch fn
@@ -43,4 +44,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+// Connect generates a container component from a presentational component and calculates the props based on the merged objs from mapStateToProps, mapDispatchToProps & its own props
 export default connect(mapStateToProps, mapDispatchToProps)(App);

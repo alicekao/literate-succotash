@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from './SearchBar';
-import NavLink from './NavLink';
+import NavLink from '../containers/NavLink';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 const genreArr = ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'];
