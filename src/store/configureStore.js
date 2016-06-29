@@ -26,8 +26,8 @@ export default function configureStore(preloadedState) {
     console.log('state changed! ', store.getState());
   });
 
-  store.dispatch(addSong({title: 'my new song'}));
-  store.dispatch(changeGenre('hip hop'));
+  // store.dispatch(addSong({title: 'my new song'}));
+  // store.dispatch(changeGenre('hip hop'));
 
   return store;
 }

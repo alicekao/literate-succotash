@@ -1,5 +1,6 @@
 import React from 'react';
-// import SearchBar from './SearchBar.jsx';
+import SearchBar from './SearchBar';
+import NavLink from './NavLink';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 const generateNavTab = (name) => {
@@ -10,9 +11,9 @@ const generateNavTab = (name) => {
   )
 };
 
+const genreArr = ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'];
 
-const NavBar = ({ changeGenre, currGenre }) => {
-  console.log('curr genre is: ', currGenre);
+const NavBar = () => {
   return (
     <Navbar>
       <Navbar.Header>
@@ -20,13 +21,15 @@ const NavBar = ({ changeGenre, currGenre }) => {
           <a href="#">Sound</a>
         </Navbar.Brand>
       </Navbar.Header>
-      <Nav activeKey={currGenre} onSelect={changeGenre}>
-        {
-          ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'].map((genre) => {
-            return generateNavTab(genre);
-          })
-        }
+      <Nav>
+        <NavLink genre='Jazz'/>
+        <NavLink genre='Hip hop'/>
+        <NavLink genre='Pop'/>
+        <NavLink genre='Electronic'/>
+        <NavLink genre='Rap'/>
+        <NavLink genre='Country'/>
       </Nav>
+      <SearchBar />
     </Navbar>
   );
 }

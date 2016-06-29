@@ -14,9 +14,7 @@ class App extends React.Component {
     const { songs, genre } = this.props;
     return (
       <div>
-        <NavBar
-        currGenre={ genre }
-        changeGenre = {changeGenre} />
+        <NavBar />
         <Sidebar />
         <Main />
         <Songs songs={songs} />
