@@ -1,11 +1,12 @@
 import { Col, Thumbnail } from 'react-bootstrap';
 import React, {PropTypes} from 'react';
 
-const MusicTile = ({song, onClick}) => {
+const MusicTile = ({ song, onClick }) => {
   return (
     <Col md={2} sm={3} xs={6}>
       <Thumbnail 
       href="#"
+      src={song.artwork_url}
       onClick={() => {onClick(song)}} 
       />
       <p>{song.title}</p>

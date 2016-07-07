@@ -22,9 +22,11 @@ export const changeGenre = genre => {
 };
 
 export const fetchSongs = query => {
+  const formatted = query.replace(' ', '_');
+  
   return dispatch => {
     dispatch(requestSongs(query));
-    return fetch(`https://api.soundcloud.com/tracks?client_id=${key}&q=${query}`)
+    return fetch(`https://api.soundcloud.com/tracks?client_id=${key}&q=${formatted}`)
     .then(response => response.json())
     .then(json => {
       console.log('success! json: ', json);

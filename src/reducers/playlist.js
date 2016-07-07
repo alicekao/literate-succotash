@@ -1,6 +1,6 @@
 import { ADD_SONG } from '../constants/ActionTypes';
 
-export default (state = [{id: 10, title: 'first song'}], action) => {
+export default (state = [], action) => {
   
   switch (action.type) {
     case ADD_SONG:
