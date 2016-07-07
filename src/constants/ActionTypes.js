@@ -6,3 +6,4 @@ export const RECEIVE_SONGS = 'RECEIVE_SONGS';
 export const NEXT_SONG = 'NEXT_SONG';
 export const PAUSE_SONG = 'PAUSE_SONG';
 export const PLAY_SONG = 'PLAY_SONG';
+export const STOP_PLAY = 'STOP_PLAY';

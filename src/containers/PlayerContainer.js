@@ -7,9 +7,21 @@ import SongDetails from '../components/SongDetails';
 import { Jumbotron, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
 class Player extends React.Component {
+  componentDidMount() {
+    const { playlist, isPlaying } = this.props;
+    const { playSong } = this.props.actions;
+
+    if (playlist.length > 0 && !isPlaying) {
+      playSong(playlist[0]);
+    }
+  }
+  
+
   render() {
-    const { currSong } = this.props;
+    const { currSong, playlist } = this.props;
     const { nextSong, pauseSong } = this.props.actions;
+
+
     return (
       <Jumbotron>
         <SongDetails currentSong={currSong}/>
@@ -30,7 +42,10 @@ class Player extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  currSong: state.songs.currSong
+  currSong: state.songs.currSong,
+  playlist: state.playlist.songList,
+  isPlaying: state.playlist.isPlaying,
+  player: state.playlist.player
 });
 
 const mapDispatchToProps = dispatch => ({
