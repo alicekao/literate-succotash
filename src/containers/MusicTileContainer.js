@@ -19,7 +19,7 @@ class MusicTileContainer extends React.Component {
     });
 
     return (
-      <Grid>
+      <Grid fluid='true'>
         <Row>
           {songs}
         </Row>

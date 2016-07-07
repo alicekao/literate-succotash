@@ -4,7 +4,7 @@
   - Can update state with dispatch(action)
   - Registers listeners via subscribe(listener)
 
-Only 1 store per appl
+Only 1 store per app
 */
 
 import { createStore, applyMiddleware } from 'redux';
