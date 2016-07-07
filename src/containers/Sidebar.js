@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as Actions from '../actions';
 
 import PlaylistEntry from '../components/PlaylistEntry';
 import { Col, ListGroup } from 'react-bootstrap';
 
 class Sidebar extends React.Component {
   render() {
-    let { playlist } = this.props;
-    playlist = playlist.map((entry) => {
+    const { playSong } = this.props.actions;
+    let { songList, currSong } = this.props.toPlay;
+    songList = songList.map((entry) => {
       return <PlaylistEntry
         key={entry.id}
         data={entry} 
+        playSong={playSong}
       />
     });
 
@@ -18,7 +22,7 @@ class Sidebar extends React.Component {
       <Col md={3}>
         <h3>Playlist</h3>
         <ListGroup>
-          {playlist}
+          {songList}
         </ListGroup>
       </Col>
     );
@@ -27,11 +31,15 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    playlist: state.playlist
+    toPlay: state.playlist
   }
 }
 
-export default connect(mapStateToProps)(Sidebar);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
 // export default class Playlist extends React.Component{
 //   render() {
 //     let queueList;

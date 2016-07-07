@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 
-const PlaylistEntry = ({data}) => {
+const PlaylistEntry = ({data, playSong}) => {
   return (
-    <ListGroupItem>
+    <ListGroupItem
+    onClick={() => playSong(data)}>
     {data.title}
     </ListGroupItem>
   );

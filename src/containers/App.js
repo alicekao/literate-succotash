@@ -9,8 +9,8 @@ import Main from '../components/Main';
 
 class App extends React.Component {
   render() {
-    
     const { songs } = this.props;
+
     return (
       <div>
         <NavBar />
@@ -27,13 +27,13 @@ App.propTypes = {
 }
 
 // How to transform current redux store state into props
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     songs: state.songs.songs
 });
 
 // Receives dispatch method and returns cb props that you want to inject into this component
 // Takes sotre dispatch as first param
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     //bindactioncreators automatically binds many action creators to a dispatch fn
     actions: bindActionCreators(Actions, dispatch)
 });

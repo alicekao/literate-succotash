@@ -14,7 +14,7 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
-console.log('request for /, dirname is: ', __dirname);
+console.log('dirname is: ', __dirname);
 app.use(express.static(__dirname + '/')),
 
 app.listen(port, function (err) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Player from './Player';
+import Player from '../containers/PlayerContainer';
 import { Col } from 'react-bootstrap';
 import MusicTileContainer from '../containers/MusicTileContainer';
 

@@ -1,4 +1,4 @@
-import { ADD_SONG, CHANGE_GENRE, SEARCH_SONGS, REQUEST_SONGS, RECEIVE_SONGS } from '../constants/ActionTypes';
+import { ADD_SONG, CHANGE_GENRE, SEARCH_SONGS, REQUEST_SONGS, RECEIVE_SONGS, PAUSE_SONG, PLAY_SONG } from '../constants/ActionTypes';
 import config from '../../config/api_keys';
 import fetch from 'isomorphic-fetch';
 
@@ -59,5 +59,18 @@ export const receiveSongs = (search, data) => {
     type: RECEIVE_SONGS,
     search,
     data
+  }
+}
+
+export const pauseSong = () => {
+  return {
+    type: PAUSE_SONG
+  }
+}
+
+export const playSong = (song) => {
+  return {
+    type: PLAY_SONG,
+    payload: song
   }
 }
