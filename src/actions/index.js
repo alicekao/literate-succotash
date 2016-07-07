@@ -3,10 +3,11 @@ import config from '../../config/api_keys';
 import fetch from 'isomorphic-fetch';
 
 const key = config.sc_API_key;
+const baseURL = `https://api.soundcloud.com/tracks?client_id=${key}`;
+
 // Action creators are functions that create actions (describe what has happened)
 // Try to pass as little data into actions as possible
 export const addSong = (songObj) => {
-  console.log('Action dispatched: ', songObj);
   return {
     type: ADD_SONG,
     payload: songObj
@@ -14,22 +15,33 @@ export const addSong = (songObj) => {
 };
 
 export const changeGenre = genre => {
-  console.log('Change genre action dispatched: ', genre);
   return {
     type: CHANGE_GENRE,
     text: genre
   };
 };
 
-export const fetchSongs = query => {
-  const formatted = query.replace(' ', '_');
-  
+export const fetchSongsByGenre = genre => {
   return dispatch => {
-    dispatch(requestSongs(query));
-    return fetch(`https://api.soundcloud.com/tracks?client_id=${key}&q=${formatted}`)
+    dispatch(changeGenre(genre));
+    dispatch(requestSongs(genre));
+
+    return fetch(`${baseURL}&tags='${genre}'`)
     .then(response => response.json())
     .then(json => {
-      console.log('success! json: ', json);
+      dispatch(receiveSongs(genre, json))
+    })
+  }
+}
+
+export const fetchSongs = query => {
+  const formatted = query.replace(' ', '_');
+
+  return dispatch => {
+    dispatch(requestSongs(query));
+    return fetch(`${baseURL}&q=${formatted}`)
+    .then(response => response.json())
+    .then(json => {
       dispatch(receiveSongs(query, json));
     })
   };

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import NavLink from '../components/NavLink';
-import { changeGenre } from '../actions';
+import { fetchSongsByGenre } from '../actions';
 
 
 class NavLinkContainer extends Component {
@@ -30,7 +30,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onClick() {
-      dispatch(changeGenre(ownProps.genre));
+      dispatch(fetchSongsByGenre(ownProps.genre));
     }
 });
 

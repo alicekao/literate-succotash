@@ -26,9 +26,9 @@ export default function configureStore(preloadedState) {
   }
 
   // Everytime state changes, log it, call subscribe() to stop listening to status updates
-  let unsubscribe = store.subscribe(() => {
-    console.log('state changed! ', store.getState());
-  });
+  // let unsubscribe = store.subscribe(() => {
+  //   console.log('state changed! ', store.getState());
+  // });
 
   // store.dispatch(addSong({title: 'my new song'}));
   // store.dispatch(changeGenre('hip hop'));
