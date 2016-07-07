@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBar from './SearchBar';
-import NavLink from '../containers/NavLink';
+import SearchBar from '../containers/SearchBar';
+import NavLinkContainer from '../containers/NavLinkContainer';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 const genreArr = ['Jazz', 'Hip hop', 'Pop', 'Electronic', 'Rap', 'Country'];
@@ -15,7 +15,7 @@ const NavBar = () => {
       </Navbar.Header>
       <Nav>
         {genreArr.map(genre => {
-          return <NavLink key={genre} genre={genre} />
+          return <NavLinkContainer key={genre} genre={genre} />
         })
         }
       </Nav>

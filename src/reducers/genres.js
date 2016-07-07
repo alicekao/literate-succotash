@@ -1,11 +1,10 @@
-import { CHANGE_GENRE } from '../constants/ActionTypes.js';
+import { CHANGE_GENRE } from '../constants/ActionTypes';
 
-export default function (state = null, action) {
-  console.log(action.type, action.text);
+export default (state = null, action) => {
   switch (action.type) {
     case CHANGE_GENRE:
       return action.text;
     default:
       return state
   }
-}
+};

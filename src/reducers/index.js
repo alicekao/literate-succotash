@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import SongsReducer from './songs.js';
-import GenreReducer from './genres.js';
+import SongsReducer from './songs';
+import GenreReducer from './genres';
+import PlaylistReducer from './playlist';
 
 // Reducers specify how app state changes
 // Each reducer handles a separate part of the state tree
@@ -16,7 +17,8 @@ import GenreReducer from './genres.js';
 
 const rootReducer = combineReducers({
   songs: SongsReducer,
-  genre: GenreReducer
+  genre: GenreReducer,
+  playlist: PlaylistReducer
 });
 
 export default rootReducer;

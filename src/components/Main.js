@@ -1,7 +1,7 @@
 import React from 'react';
 import Player from './Player';
 import { Col } from 'react-bootstrap';
-import MusicTileContainer from './MusicTileContainer';
+import MusicTileContainer from '../containers/MusicTileContainer';
 
 const Main = () => {
   return (

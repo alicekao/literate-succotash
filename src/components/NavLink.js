@@ -2,7 +2,7 @@ import React from 'react';
 import { NavItem } from 'react-bootstrap';
 
 // Link compositional component receives calculated props from NavLink container
-const Link = ({active, onClick, children}) => {
+const NavLink = ({active, onClick, children}) => {
   return (
     <NavItem
       active={active}
@@ -15,4 +15,4 @@ const Link = ({active, onClick, children}) => {
   );
 };
 
-export default Link;
+export default NavLink;

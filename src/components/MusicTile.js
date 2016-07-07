@@ -1,18 +1,21 @@
 import { Col, Thumbnail } from 'react-bootstrap';
 import React, {PropTypes} from 'react';
 
-const MusicTile = ({song}) => {
+const MusicTile = ({song, onClick}) => {
   return (
     <Col md={2} sm={3} xs={6}>
-      <Thumbnail href="#" />
-      <p>song.title</p>
+      <Thumbnail 
+      href="#"
+      onClick={() => {onClick(song)}} 
+      />
+      <p>{song.title}</p>
     </Col>
   );
 };
 
-// MusicTile.propTypes = {
-  
-// };
+MusicTile.propTypes = {
+  song: PropTypes.object.isRequired
+};
 
 export default MusicTile;
 // export default class MusicTile extends React.Component {

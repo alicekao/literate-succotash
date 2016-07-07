@@ -7,13 +7,17 @@
 Only 1 store per appl
 */
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import { addSong, changeGenre } from '../actions';
+
+const loggerMiddleware = createLogger();
 
 export default function configureStore(preloadedState) {
   // Create the store w/ your reducer and the initial state
-  const store = createStore(rootReducer, preloadedState);
+  const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
