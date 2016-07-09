@@ -11,16 +11,45 @@ class Player extends React.Component {
     const { playlist, isPlaying } = this.props;
     const { playSong } = this.props.actions;
 
+    this.onNextClick = this.onNextClick.bind(this);
     if (playlist.length > 0 && !isPlaying) {
       playSong(playlist[0]);
     }
   }
-  
+
+  renderPlayPauseBtn() {
+    if (this.props.isPlaying) {
+      return (
+        <Button onClick={this.props.actions.pauseSong}>
+          <Glyphicon glyph="pause"></Glyphicon>
+        </Button>
+      );
+    }
+    return (
+      <Button onClick={this.props.actions.resumePlay}>
+        <Glyphicon glyph="play"></Glyphicon>
+      </Button>
+    );
+  }
+
+  findIndexById(item, arr) {
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id === item.id) {
+        return i;
+      }
+    }
+  }
+
+  onNextClick() {
+    const { playlist } = this.props;
+    if (this.findIndexById(this.props.currSong, this.props.playlist) < this.props.playlist.length) {
+      console.log('can go to next!');
+    }
+  }
 
   render() {
     const { currSong, playlist } = this.props;
-    const { nextSong, pauseSong } = this.props.actions;
-
+    const { playNext, pauseSong } = this.props.actions;
 
     return (
       <Jumbotron>
@@ -29,10 +58,8 @@ class Player extends React.Component {
           <Button>
             <Glyphicon glyph="backward"></Glyphicon>
           </Button>
-          <Button onClick={pauseSong}>
-            <Glyphicon glyph="pause"></Glyphicon>
-          </Button>
-          <Button>
+          {this.renderPlayPauseBtn()}
+          <Button onClick={this.onNextClick}>
             <Glyphicon glyph="forward"></Glyphicon>
           </Button>
         </ButtonGroup>

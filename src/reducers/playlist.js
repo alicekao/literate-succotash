@@ -1,4 +1,12 @@
-import { ADD_SONG, PAUSE_SONG, PLAY_SONG, STOP_PLAY } from '../constants/ActionTypes';
+import {
+  ADD_SONG, 
+  PAUSE_SONG, 
+  PLAY_SONG, 
+  STOP_PLAY, 
+  PLAY_NEXT,
+  RESUME_PLAY
+} from '../constants/ActionTypes';
+
 const initialState = {
   songList: [{title:1, id:46885926}],
   currSong: null,
@@ -13,18 +21,31 @@ export default (state = initialState, action) => {
         songList: [...state.songList, action.payload]
       })
     case PAUSE_SONG:
-      if (state.player) {
+      if (state.player && state.isPlaying) {
         state.player.pause();
       }
       return Object.assign({}, state, {
         isPlaying: false
-      })
+      });
+    case RESUME_PLAY:
+      if (state.player) {
+        state.player.play();
+      }
+      return Object.assign({}, state, {
+        isPlaying: true
+      });
     case PLAY_SONG:
+      if (state.player) {
+        state.player.play();
+        return Object.assign({}, state, {
+          isPlaying: true
+        });
+      }
       return Object.assign({}, state, {
         currSong: action.payload,
         isPlaying: true,
         player: action.player
-      })
+      });
     case STOP_PLAY:
       if (state.player) {
         state.player.pause();
@@ -33,6 +54,16 @@ export default (state = initialState, action) => {
         player: null,
         isPlaying: false
       })
+    case PLAY_NEXT:
+      if (state.player) {
+        state.player.pause();
+      }
+      // if (findIndexById(state.currSong, state.songList) < state.songList.length - 1) {
+
+        return Object.assign({}, state, {
+          isPlaying: true
+        })
+      // }
     default:
       return state;
   }

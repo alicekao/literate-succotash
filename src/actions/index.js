@@ -1,4 +1,16 @@
-import { ADD_SONG, CHANGE_GENRE, SEARCH_SONGS, REQUEST_SONGS, RECEIVE_SONGS, PAUSE_SONG, PLAY_SONG, PLAY_PLAYLIST, STOP_PLAY } from '../constants/ActionTypes';
+import { 
+  ADD_SONG, 
+  CHANGE_GENRE, 
+  SEARCH_SONGS, 
+  REQUEST_SONGS, 
+  RECEIVE_SONGS, 
+  PAUSE_SONG, 
+  PLAY_SONG, 
+  PLAY_PLAYLIST, 
+  STOP_PLAY, 
+  PLAY_NEXT,
+  RESUME_PLAY 
+} from '../constants/ActionTypes';
 import config from '../../config/api_keys';
 import fetch from 'isomorphic-fetch';
 
@@ -22,11 +34,13 @@ export const changeGenre = genre => {
 };
 
 export const fetchSongsByGenre = genre => {
+  const formatted = genre.replace(' ', 
+  '_');
   return dispatch => {
     dispatch(changeGenre(genre));
     dispatch(requestSongs(genre));
 
-    return fetch(`${baseURL}&tags='${genre}'`)
+    return fetch(`${baseURL}&tags='${formatted}'`)
       .then(response => response.json())
       .then(json => {
         dispatch(receiveSongs(genre, json))
@@ -35,7 +49,7 @@ export const fetchSongsByGenre = genre => {
 }
 
 export const fetchSongs = query => {
-  const formatted = query.replace(' ', '_');
+  const formatted = query.replace(' ', '');
 
   return dispatch => {
     dispatch(requestSongs(query));
@@ -68,6 +82,12 @@ export const pauseSong = () => {
   }
 }
 
+export const resumePlay = () => {
+  return {
+    type: RESUME_PLAY
+  }
+}
+
 const playSongAction = (song, player) => {
   return {
     type: PLAY_SONG,
@@ -86,6 +106,15 @@ export const playSong = (song) => {
   }
 }
 
+export const playNext = () => {
+  return {
+    type: PLAY_NEXT
+  }
+  // return dispatch => {
+  //   dispatch(stopPlay());
+  //   dispatch({type: PLAY_NEXT});
+  // }
+}
 
 export const stopPlay = () => {
   return {
