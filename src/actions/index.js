@@ -35,7 +35,7 @@ export const changeGenre = genre => {
 
 export const fetchSongsByGenre = genre => {
   const formatted = genre.replace(' ', 
-  '_');
+  '');
   return dispatch => {
     dispatch(changeGenre(genre));
     dispatch(requestSongs(genre));
@@ -49,7 +49,7 @@ export const fetchSongsByGenre = genre => {
 }
 
 export const fetchSongs = query => {
-  const formatted = query.replace(' ', '');
+  const formatted = query.replace(' ', '_');
 
   return dispatch => {
     dispatch(requestSongs(query));
