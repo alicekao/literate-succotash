@@ -7,6 +7,11 @@ import SongDetails from '../components/SongDetails';
 import { Jumbotron, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
 class Player extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('player instance is: ', this);
+  }
+  
   componentDidUpdate(prevProps, prevState) {
     const { playlist, currSong, actions } = prevProps;
     const newPlaylist = this.props.playlist;
@@ -55,7 +60,6 @@ class Player extends React.Component {
   onNavClick(toWhere) {
     const { currSong, playlist } = this.props;
     const idx = this.findIndexById(currSong, playlist);
-    console.log('index is: ', idx);
     if (toWhere === 'next') {
       this.props.actions.playSong(playlist[idx+1]);
     } else {

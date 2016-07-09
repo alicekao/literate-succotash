@@ -101,15 +101,21 @@ export const playSong = (song) => {
     dispatch(stopPlay());
     SC.stream(`/tracks/${song.id}`).then(player => {
       player.play();
-      player.on('finish', () => {console.log('finished!');});
-      dispatch(playSongAction(song, player))
+      player.on('finish', () => {
+        dispatch(playNext(song.id));
+      });
+      dispatch(playSongAction(song, player));
     });
   }
 }
 
-export const playNext = (song) => {
-  return dispatch => {
-    dispatch(playSong(song));
+export const playNext = (currSongId) => {
+  return (dispatch, getState) => {
+    const { currSong, songList } = getState().playlist;
+    const idx = findIndexById(currSong, songList);
+    if (idx < songList.length - 1) {
+      dispatch(playSong(songList[idx+1]));
+    }
   }
 }
 
@@ -118,3 +124,13 @@ export const stopPlay = () => {
     type: STOP_PLAY
   }
 }
+
+function findIndexById(item, arr) {
+    if (!item) return null;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].id === item.id) {
+        return i;
+      }
+    }
+    return null;
+  }
