@@ -1,12 +1,13 @@
-#player {
+div#player {
   background-image: url("../forestbckgd.jpg");
   background-size: cover;
-  text-align: center;
+  text-align: center !important;
+  padding-top: 20px;
 }
 
-#player .jumbotron {
+/*#player .jumbotron {
   background: none;
-}
+}*/
 
 #player h3 {
   color: white;

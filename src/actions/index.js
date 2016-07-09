@@ -106,14 +106,10 @@ export const playSong = (song) => {
   }
 }
 
-export const playNext = () => {
-  return {
-    type: PLAY_NEXT
+export const playNext = (song) => {
+  return dispatch => {
+    dispatch(playSong(song));
   }
-  // return dispatch => {
-  //   dispatch(stopPlay());
-  //   dispatch({type: PLAY_NEXT});
-  // }
 }
 
 export const stopPlay = () => {

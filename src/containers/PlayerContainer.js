@@ -7,15 +7,15 @@ import SongDetails from '../components/SongDetails';
 import { Jumbotron, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
 class Player extends React.Component {
-  componentDidMount() {
-    const { playlist, isPlaying } = this.props;
-    const { playSong } = this.props.actions;
-
-    this.onNextClick = this.onNextClick.bind(this);
-    if (playlist.length > 0 && !isPlaying) {
-      playSong(playlist[0]);
+  componentDidUpdate(prevProps, prevState) {
+    const { playlist, currSong, actions } = prevProps;
+    const newPlaylist = this.props.playlist;
+    
+    if (playlist.length === 0 && !currSong) {
+      actions.playSong(newPlaylist[0]);
     }
   }
+
 
   renderPlayPauseBtn() {
     if (this.props.isPlaying) {
@@ -32,34 +32,54 @@ class Player extends React.Component {
     );
   }
 
+  isNextValid() {
+    const { playlist, currSong } = this.props;
+    return (this.findIndexById(currSong, playlist) === playlist.length - 1) ? false : true;
+  }
+
+  isPrevValid() {
+    const { playlist, currSong } = this.props;
+    return (this.findIndexById(currSong, playlist) === 0) ? false : true;
+  }
+
   findIndexById(item, arr) {
+    if (!item) return null;
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === item.id) {
         return i;
       }
     }
+    return null;
   }
 
-  onNextClick() {
-    const { playlist } = this.props;
-    if (this.findIndexById(this.props.currSong, this.props.playlist) < this.props.playlist.length) {
-      console.log('can go to next!');
+  onNavClick(toWhere) {
+    const { currSong, playlist } = this.props;
+    const idx = this.findIndexById(currSong, playlist);
+    console.log('index is: ', idx);
+    if (toWhere === 'next') {
+      this.props.actions.playSong(playlist[idx+1]);
+    } else {
+      this.props.actions.playSong(playlist[idx-1]);
     }
   }
 
   render() {
     const { currSong, playlist } = this.props;
-    const { playNext, pauseSong } = this.props.actions;
+    const { pauseSong } = this.props.actions;
 
     return (
-      <Jumbotron>
-        <SongDetails currentSong={currSong}/>
+      <Jumbotron id="player">
+        <SongDetails currSong={currSong}/>
         <ButtonGroup>
-          <Button>
+          <Button
+            onClick={() => this.onNavClick('prev')}
+            disabled={!this.isPrevValid()}>
             <Glyphicon glyph="backward"></Glyphicon>
           </Button>
-          {this.renderPlayPauseBtn()}
-          <Button onClick={this.onNextClick}>
+          {this.renderPlayPauseBtn() }
+          <Button
+            onClick={() => this.onNavClick('next')}
+            disabled={!this.isNextValid()}>
             <Glyphicon glyph="forward"></Glyphicon>
           </Button>
         </ButtonGroup>
@@ -69,7 +89,7 @@ class Player extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  currSong: state.songs.currSong,
+  currSong: state.playlist.currSong,
   playlist: state.playlist.songList,
   isPlaying: state.playlist.isPlaying,
   player: state.playlist.player
@@ -80,23 +100,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
-// export default class Player extends React.Component {
-//   render() {
-//     return (
-//       <Jumbotron id="player">
-//         <SongDetails currentSong={this.props.currentSong}/>
-//         <ButtonGroup>
-//           <Button onClick={() => this.props.playPrev()}>
-//             <Glyphicon glyph="backward"></Glyphicon>
-//           </Button>
-//           <Button onClick={() => this.props.togglePlay()}>
-//             <Glyphicon glyph="pause"></Glyphicon>
-//           </Button>
-//           <Button onClick={() => this.props.playNext()}>
-//             <Glyphicon glyph="forward"></Glyphicon>
-//           </Button>
-//         </ButtonGroup>
-//       </Jumbotron>
-//     );
-//   }
-// }

@@ -8,11 +8,12 @@ import {
 } from '../constants/ActionTypes';
 
 const initialState = {
-  songList: [{title:1, id:46885926}],
+  songList: [],
   currSong: null,
   isPlaying: false,
   player: null
-}
+};
+
 export default (state = initialState, action) => {
 
   switch (action.type) {
@@ -35,12 +36,6 @@ export default (state = initialState, action) => {
         isPlaying: true
       });
     case PLAY_SONG:
-      if (state.player) {
-        state.player.play();
-        return Object.assign({}, state, {
-          isPlaying: true
-        });
-      }
       return Object.assign({}, state, {
         currSong: action.payload,
         isPlaying: true,
@@ -53,17 +48,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         player: null,
         isPlaying: false
-      })
-    case PLAY_NEXT:
-      if (state.player) {
-        state.player.pause();
-      }
-      // if (findIndexById(state.currSong, state.songList) < state.songList.length - 1) {
-
-        return Object.assign({}, state, {
-          isPlaying: true
-        })
-      // }
+      });
     default:
       return state;
   }

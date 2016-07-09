@@ -1,11 +1,11 @@
 import React from 'react';
 
-const SongDetails = (props) => {
+const SongDetails = ({ currSong }) => {
   let title = ' ';
   let plays = ' ';
-  if (props.currentSong) {
-   title = props.currentSong.title;
-   plays = `Plays ${props.currentSong.playback_count}`;
+  if (currSong) {
+   title = currSong.title;
+   plays = `Plays ${currSong.playback_count}`;
   }
   return (
     <div>
