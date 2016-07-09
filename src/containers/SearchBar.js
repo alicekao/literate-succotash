@@ -18,34 +18,32 @@ class SearchBar extends React.Component {
     this.setState({ term: event.target.value });
   }
 
-  onSearchClick() {
+  onSearchClick(e) {
+    e.preventDefault();
     this.props.fetchSongs(this.state.term);
-    // requestSongs(this.state.term);
     this.setState({term: ''});
   }
 
   render() {
     let input;
     return (
-      <Navbar.Form onSubmit={()=>console.log('hi')} pullRight>
+      <Form onSubmit={this.onSearchClick}
+      inline>
         <FormGroup>
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={this.onInputChange}
-            value={this.state.term}>
-          </input>
+        <FormControl
+        type="text"
+        placeholder="Search"
+        onChange={this.onInputChange}
+        value={this.state.term} />
+          
         </FormGroup>
         <Button
           type="submit"
           bsStyle="success"
-          onClick={() => {
-            this.onSearchClick();
-          } }
           >
           <Glyphicon glyph="search"></Glyphicon>
         </Button>
-      </Navbar.Form>
+      </Form>
     );
   }
 };

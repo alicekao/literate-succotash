@@ -101,6 +101,7 @@ export const playSong = (song) => {
     dispatch(stopPlay());
     SC.stream(`/tracks/${song.id}`).then(player => {
       player.play();
+      player.on('finish', () => {console.log('finished!');});
       dispatch(playSongAction(song, player))
     });
   }
