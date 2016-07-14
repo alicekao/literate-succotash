@@ -9,7 +9,6 @@ import { Jumbotron, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    console.log('player instance is: ', this);
   }
   
   componentDidUpdate(prevProps, prevState) {

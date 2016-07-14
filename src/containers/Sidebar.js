@@ -7,6 +7,10 @@ import PlaylistEntry from '../components/PlaylistEntry';
 import { Col, ListGroup } from 'react-bootstrap';
 
 class Sidebar extends React.Component {
+  removeFromPlaylist(song) {
+    console.log('removing: ', song);
+  }
+
   render() {
     const { playSong } = this.props.actions;
     let { songList, currSong } = this.props.toPlay;
@@ -15,6 +19,7 @@ class Sidebar extends React.Component {
         key={entry.id}
         data={entry} 
         playSong={playSong}
+        onClick={this.removeFromPlaylist}
       />
     });
 

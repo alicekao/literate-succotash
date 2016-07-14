@@ -18,8 +18,7 @@
   "homepage": "https://github.com/alicekao/sound#readme",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register test/App.spec.js",
-    "webpack-server": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --hot",
-    "start": "node server.js"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --colors --hot"
   },
   "dependencies": {
     "body-parser": "^1.15.1",

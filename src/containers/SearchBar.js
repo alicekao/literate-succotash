@@ -27,6 +27,7 @@ class SearchBar extends React.Component {
   render() {
     let input;
     return (
+      <Navbar.Form pullRight inline>
       <Form onSubmit={this.onSearchClick}
       inline>
         <FormGroup>
@@ -44,6 +45,7 @@ class SearchBar extends React.Component {
           <Glyphicon glyph="search"></Glyphicon>
         </Button>
       </Form>
+      </Navbar.Form>
     );
   }
 };

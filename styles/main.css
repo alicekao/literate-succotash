@@ -12,3 +12,8 @@ div#player {
 #player h3 {
   color: white;
 }
+
+nav.navbar>div.container {
+  margin-left: 2px;
+  margin-right: 2px;
+}

@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem, Glyphicon } from 'react-bootstrap';
 
-const PlaylistEntry = ({data, playSong}) => {
+const PlaylistEntry = ({data, playSong, onClick}) => {
   return (
-    <ListGroupItem
-    onClick={() => playSong(data)}>
-    {data.title}
-    </ListGroupItem>
+    <div>
+      <ListGroupItem
+        onClick={() => playSong(data) }>
+        {data.title}
+      </ListGroupItem>
+    </div>
   );
 };
 
